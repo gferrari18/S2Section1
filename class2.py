@@ -64,10 +64,10 @@ t1.favoritecolor = "black"
 t1.td = "difficult"
 
 class Course:
-    students = []
-    subject = "Computer Science"
-    clssize = len(students)
-    teacher = Teacher()
+    def __init__(self, students = [], subject = "", teacher = Teacher()):
+        self.students = []
+        self.subject = "Computer Science"
+        self.teacher = Teacher()
     def enlist(self, x):
         self.students.append(x)
     def sub(self):
@@ -78,16 +78,20 @@ class Course:
     def getstudcount(self):
         return len(self.students)
 
-
 c1 = Course()
 c1.students = [stud,stud1,stud2,stud3,stud4]
 c1.subject = "Counter Strike, how to get out of silver"
-print(c1.clssize)
 
+c1.teacher = t1
 for s in c1.students:
     if s.name.startswith('M'):
         print(s.name)
 
+
 t1.teach()
 c1.roster()
-c1.getstudcount()
+
+for x in c1.students:
+    print(x.name + " says: ")
+    x.ask_question()
+
