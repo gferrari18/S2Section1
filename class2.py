@@ -1,14 +1,47 @@
+import random
 
-class Student:
-    def __init__(self, name="", ID=-1, birthdate="01/01/1995"):
+class Teacher:
+    def __init__(self, name="", ID=-1, birthdate="12/12/12",SME="",favoritecolor="",td=""):
         self.name = name
         self.ID = ID
         self.birthdate = birthdate
+        self.SME = SME
+        self.favoritecolor = favoritecolor
+        self.td = td
+    def teach(self):
+        print(self.name + " is teaching " + self.SME + ".")
+
+    def ans(self):
+        print("Well, maybe you should try it")
+
+class Course:
+    def __init__(self, students = [], subject = "", teacher = Teacher()):
+        self.students = []
+        self.subject = "Computer Science"
+        self.teacher = Teacher()
+    def enlist(self, x):
+        self.students.append(x)
+    def sub(self):
+        print("This is a " + self.subject + " course.")
+    def roster(self):
+        for x in self.students:
+            print(x.name)
+    def getstudcount(self):
+        return len(self.students)
+    def printcourse(self):
+        print(self.subject)
+
+class Student:
+    def __init__(self, name="", ID=-1, birthdate="01/01/1995", crs = Course()):
+        self.name = name
+        self.ID = ID
+        self.birthdate = birthdate
+        self.crs = Course()
     def study(self):
         print(self.name + ' is studying')
 
-    def do_homework(self, course):
-        print(self.name + ' is doing homework for their ' + course + ' course.')
+    def do_homework(self):
+        print(self.name + ' is doing homework for their ' + self.crs.subject + ' course.')
 
     def ask_question(self):
         print('Wait, what?')
@@ -42,19 +75,7 @@ stud4.birthdate = "12/09/1993"
 stud5 = Student("Mahoe", 15432, "12/31/1998")
 stud6 = Student("Maloki", 12432, "12/10/3123")
 
-class Teacher:
-    def __init__(self, name="", ID=-1, birthdate="12/12/12",SME="",favoritecolor="",td=""):
-        self.name = name
-        self.ID = ID
-        self.birthdate = birthdate
-        self.SME = SME
-        self.favoritecolor = favoritecolor
-        self.td = td
-    def teach(self):
-        print(self.name + " is teaching " + self.SME + ".")
 
-    def ans(self):
-        print("Well, maybe you should try it")
 
 t1 = Teacher()
 t1.name = "Monte"
@@ -63,24 +84,13 @@ t1.birthdate = "14/32/14"
 t1.favoritecolor = "black"
 t1.td = "difficult"
 
-class Course:
-    def __init__(self, students = [], subject = "", teacher = Teacher()):
-        self.students = []
-        self.subject = "Computer Science"
-        self.teacher = Teacher()
-    def enlist(self, x):
-        self.students.append(x)
-    def sub(self):
-        print("This is a " + self.subject + " course.")
-    def roster(self):
-        for x in self.students:
-            print(x.name)
-    def getstudcount(self):
-        return len(self.students)
-
 c1 = Course()
 c1.students = [stud,stud1,stud2,stud3,stud4]
 c1.subject = "Counter Strike, how to get out of silver"
+
+for x in c1.students:
+    x.crs = c1
+
 
 c1.teacher = t1
 for s in c1.students:
@@ -92,6 +102,12 @@ t1.teach()
 c1.roster()
 
 for x in c1.students:
+    nic = random.randrange(1,4)
     print(x.name + " says: ")
     x.ask_question()
-
+    if nic == 1:
+        x.study()
+    if nic == 2:
+        x.do_homework()
+    if nic == 3:
+        x.ask_question
